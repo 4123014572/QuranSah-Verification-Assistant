@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<title>Quransah Verification Assistant</title>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js'></script>
+</head>
+
+<body>
+	<gcse:search></gcse:search>
+    <script>
+        $.ajax({
+            type: 	"GET",
+            dataType: "json",
+            url:	"https://www.googleapis.com/customsearch/v1?key=AIzaSyBW0v6ieTM9OL7oQzTGHPbiWhXkW5Lk8Ok&cx=007014468248327134923:rsvcsig4rbm&q=اهدنا",
+            success: function(msg){
+                for(var i in msg.items) {
+                    console.log(msg.items[i].htmlTitle+"\n"+msg.items[i].link.replace(/http:\/\/quran\.ksu\.edu\.sa.*\/(sura.*aya.*)\.html/g,'$1').replace('sura','http://tanzil.net/#').replace('-aya',':'));
+                }
+            }
+        });
+        
+    </script>
+</body>
+</html>

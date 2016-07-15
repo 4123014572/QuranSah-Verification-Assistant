@@ -1,5 +1,5 @@
 ~*
-sync.ffs_db
+sync.ffs*
 
 # Windows image file caches
 Thumbs.db

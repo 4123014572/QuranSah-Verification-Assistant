@@ -2,34 +2,14 @@
 <html>
 <head>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Quransah Verification Assistant</title>
+    <link href="css/style.css" rel="stylesheet">
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js'></script>
-    <style>
-        * {
-            font-size: 26px;
-        }
-        .result {
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .item {
-            margin: 10px 0;
-            width: 100%;
-            padding: 5px;
-            box-sizing: border-box;
-            border: 1px solid #D4DDCC;
-        }
-        .item:nth-child(odd) {
-            background: #F5FFEB;
-        }
-        .item:nth-child(even) {
-            background: #EEF8E5;
-        }
-    </style>
 </head>
 
 <body>
-    <input type="text" onchange="search(this.value)">
+    <input type="text" class="rtl" onchange="search(this.value)" placeholder="enter quran aya..." value="بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ">
     <div class="result"></div>
     <script>
         var keys = [
@@ -40,28 +20,36 @@
             'AIzaSyA1WmDR_M_2WzcMt6GGqx9yEQ0AbrGDow8'
         ];
         var pin = 0;
-        search('ان الذين');
         
-        //      ان الذين site://quran.ksu.edu.sa
-        
-        
+        $('input.rtl').change();
+
         function search(query) {
+            query = query
+                .replace(/[\u0617-\u061A\u064B-\u0652\u06e1-\u06e9]/g, "")   //remove Tashkeel
+                .replace(/[\u0671-\u0675\u0622\u0623\u0625]/g, "\u0627")      //strip symboled alif
+                .replace(/\(\d+\)/g, " ")                                                                               //remove ayaNumber
+            ;
+            
+            console.log("Search for "+query);
+            
             $.ajax({
                 type: 	"GET",
                 dataType: "json",
                 url:
-                    "https://www.googleapis.com/customsearch/v1"+"?"+
-                    "key="+keys[pin]+"&"+
-                    "cx=007014468248327134923:pkmnhyz-eyu"+"&"+
-                    "q="+query,
+                    "https://www.googleapis.com/customsearch/v1"+
+                    "?key="+keys[pin]+"&"+
+                    "&cx=007014468248327134923:pkmnhyz-eyu"+
+                    "&num=10&start=1"+
+                    "&q="+query,
                 success: function(msg){
                     var fetched = [];
                     var item = '';
+                    console.log(msg.items);
                     for(var i in msg.items) {
-                        var temp = msg.items[i].link.replace(/.*?(\d+).*?(\d+).*/g,'$1-$2').split('-');
+                        var temp = msg.items[i].link.replace(/.*?\/sura.*?(\d+).*?(\d+).*/g,'$1-$2').split('-');
                         if(fetched.indexOf(temp)<0) {
                             fetched.push(temp);
-                            item += '<div class=item>'+msg.items[i].htmlTitle.replace(/\d+/g,'')+'<br><a href="'+'http://tanzil.net/#'+temp[0]+':'+temp[1]+'"></a></div>';
+                            item += '<div class="item rtl">'+msg.items[i].htmlSnippet+'<div class="desc">Sura '+temp[0]+', Aya '+temp[1]+'</div></div>';
                         }
                     }
                     $('.result').html(item);

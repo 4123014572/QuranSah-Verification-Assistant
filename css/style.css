@@ -1,0 +1,34 @@
+@font-face {
+    font-family: msuighur;
+    src: url(../font/msuighur.ttf);
+}
+* {
+    font: 33px msuighur;
+}
+.result {
+    width: 100%;
+    box-sizing: border-box;
+}
+.item {
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #D4DDCC;
+}
+.item:nth-child(odd) {
+    background: #F5FFEB;
+}
+.item:nth-child(even) {
+    background: #EEF8E5;
+}
+.desc {
+    color: #2980B9;
+}
+.rtl {
+    padding: 5px;
+    direction: rtl;
+    float: right;
+}
+.rtl b {
+    color: #E74C3C;
+}

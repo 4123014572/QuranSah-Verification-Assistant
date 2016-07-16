@@ -52,7 +52,7 @@
         for($a=0; $a<count($s); $a++) {
             $e .= $eastern_arabic[(int)$s[$a]];
         }
-        return ' ﴿'.$e.'﴾&nbsp; ';
+        return '&nbsp;﴿'.$e.'﴾&nbsp;';
     }
     
     $endtime = microtime(true);

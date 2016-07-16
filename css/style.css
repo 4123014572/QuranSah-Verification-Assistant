@@ -1,34 +1,85 @@
 @font-face {
-    font-family: msuighur;
-    src: url(../font/msuighur.ttf);
+    font-family: trado;
+    src: url(../font/trado.ttf);
 }
-* {
-    font: 33px msuighur;
+@font-face {
+    font-family: scheherazade;
+    src: url(../font/Scheherazade-Regular.ttf);
+    font-weight: 200;
+}
+@font-face {
+    font-family: scheherazade;
+    src: url(../font/Scheherazade-Bold.ttf);
+    font-weight: bold;
+}
+body {
+    font: 28px scheherazade;
+    margin: 0;
+}
+.container {
+    direction: rtl;
+    position: relative;
+    width: 500px;
+    box-sizing: border-box;
+    padding: 50px 50px 10px 50px;
+    background: #F7FCE3 url(../img/frame.png) repeat-y -500px 0;
+    line-height: 45px;
+}
+.container:before {
+    display: block;
+    width: 500px;
+    height: 23px;
+    background: #F7FCE3 url(../img/frame.png) no-repeat;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.container:after {
+    display: block;
+    width: 500px;
+    height: 23px;
+    background: #F7FCE3 url(../img/frame.png) no-repeat 0 bottom;
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+.sura {
+    color: black;
+    background: pink;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.number {
+    display: inline-block;
+    color: #2E8B57;
+    font: 20px trado;
 }
 .result {
     width: 100%;
     box-sizing: border-box;
 }
-.item {
+.result .item {
     margin-top: 10px;
     width: 100%;
     box-sizing: border-box;
     border: 1px solid #D4DDCC;
 }
-.item:nth-child(odd) {
+.result .item:nth-child(odd) {
     background: #F5FFEB;
 }
-.item:nth-child(even) {
+.result .item:nth-child(even) {
     background: #EEF8E5;
 }
-.desc {
+.result .desc {
     color: #2980B9;
 }
-.rtl {
+.result .rtl {
     padding: 5px;
     direction: rtl;
     float: right;
 }
-.rtl b {
+.result .rtl b {
     color: #E74C3C;
 }

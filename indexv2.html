@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<title>Quransah Verification Assistant</title>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js'></script>
+    <style>
+        * {
+            font-size: 26px;
+        }
+        .result {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .item {
+            margin: 10px 0;
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+            border: 1px solid #D4DDCC;
+        }
+        .item:nth-child(odd) {
+            background: #F5FFEB;
+        }
+        .item:nth-child(even) {
+            background: #EEF8E5;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" onchange="search(this.value)">
+    <div class="result"></div>
+    <script>
+        var keys = [
+            'AIzaSyDQ9H9ZrvKONfmJRHZZb-vWoqcbWFbMR00',
+            'AIzaSyCkGrfuoX9Je30Ie0jRSKVVr2YEpFHa6f0',
+            'AIzaSyBDIEw78uMLhZ2XfF7QCtpFPEPOl6aqQpI',
+            'AIzaSyDUViYxm8Vv-qCypLPWmsOJPEZx0WfAAxQ',
+            'AIzaSyA1WmDR_M_2WzcMt6GGqx9yEQ0AbrGDow8'
+        ];
+        var pin = 0;
+        search('ان الذين');
+        
+        //      ان الذين site://quran.ksu.edu.sa
+                
+        function search(query) {
+            $.ajax({
+                type: 	"GET",
+                dataType: "json",
+                url:
+                    "https://www.googleapis.com/customsearch/v1"+"?"+
+                    "key="+keys[pin]+"&"+
+                    "cx=007014468248327134923:pkmnhyz-eyu"+"&"+
+                    "q="+query,
+                success: function(msg){
+                    var fetched = [];
+                    var item = '';
+                    for(var i in msg.items) {
+                        var temp = msg.items[i].link.replace(/.*?(\d+).*?(\d+).*/g,'$1-$2').split('-');
+                        if(fetched.indexOf(temp)<0) {
+                            fetched.push(temp);
+                            item += '<div class=item>'+msg.items[i].htmlTitle.replace(/\d+/g,'')+'<br><a href="'+'http://tanzil.net/#'+temp[0]+':'+temp[1]+'"></a></div>';
+                        }
+                    }
+                    
+                    $('.result').html(item);
+                },
+                error: function(err) {
+                    //console.log(err.status + ': ' + err.responseJSON.error.message);
+                    if(err.status=='403') {
+                        pin++;
+
+                        if(pin==5)
+                        {
+                            alert("Server is currently busy, please try again tomorrow.");
+                        }
+                        else{
+                            console.log('Trying '+pin);
+                            search(query);
+                        }
+
+                        
+                        
+                    }
+                }
+            });
+        }        
+    </script>
+</body>
+</html>

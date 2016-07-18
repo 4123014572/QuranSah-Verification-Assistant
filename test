@@ -1,0 +1,13 @@
+var key=["a","b","c"];
+var pin=0;
+cetak("Result: ");
+
+function cetak(label){
+console.log(label+key[pin]);
+pin++;
+setTimeout("cetak('"+label+"')",1000);
+if(pin==2)
+{
+pin=0;
+}
+}

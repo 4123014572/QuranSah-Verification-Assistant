@@ -4,13 +4,19 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Quransah Verification Assistant</title>
+    
     <link href="css/style.css" rel="stylesheet">
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js'></script>
+    <link href="lib/tipuesearch/tipuesearch.css" rel="stylesheet">
+        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 
-<body>
-    <input type="text" class="rtl" onchange="search(this.value)" placeholder="enter quran aya..." value="بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ">
-    <div class="result"></div>
+<body style="padding: 20px;">
+    <form action="">
+        <input type="text" name="q" id="tipue_search_input" autocomplete="off">
+    </form>
+    <div id="tipue_search_content"></div>
+    
     <script>
         var keys = [
             'AIzaSyDQ9H9ZrvKONfmJRHZZb-vWoqcbWFbMR00',
@@ -21,17 +27,25 @@
         ];
         var pin = 0;
         
-        $('input.rtl').change();
-
+        if(getURLP('q')) {
+            $('#tipue_search_input').val(getURLP('q'));
+            search($('#tipue_search_input').val())
+        }
+        
+        function getURLP(name) {
+            return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20')) || null;
+        }
+    
         function search(query) {
-            query = query
-                .replace(/[\u0617-\u061A\u064B-\u0652\u06e1-\u06e9]/g, "")   //remove Tashkeel
-                .replace(/[\u0671-\u0675\u0622\u0623\u0625]/g, "\u0627")      //strip symboled alif
-                .replace(/\(\d+\)/g, " ")                                                                               //remove ayaNumber
-            ;
+            //query = query
+            //    .replace(/[\u0617-\u061A\u064B-\u0652\u06e1-\u06e9]/g, "")   //remove Tashkeel
+            //    .replace(/[\u0671-\u0675\u0622\u0623\u0625]/g, "\u0627")      //strip symboled alif
+            //    .replace(/\(\d+\)/g, " ")                                                                               //remove ayaNumber
+            //;
             
+            query = query.replace(/ /g, ' OR ');
             console.log("Search for "+query);
-            
+
             $.ajax({
                 type: 	"GET",
                 dataType: "json",
@@ -42,17 +56,17 @@
                     "&num=10&start=1"+
                     "&q="+query,
                 success: function(msg){
-                    var fetched = [];
                     var item = '';
-                    console.log(msg.items);
+                    console.log(msg);
+                    //console.log(msg.items);
                     for(var i in msg.items) {
-                        var temp = msg.items[i].link.replace(/.*?\/sura.*?(\d+).*?(\d+).*/g,'$1-$2').split('-');
-                        if(fetched.indexOf(temp)<0) {
-                            fetched.push(temp);
-                            item += '<div class="item rtl">'+msg.items[i].htmlSnippet+'<div class="desc">Sura '+temp[0]+', Aya '+temp[1]+'</div></div>';
-                        }
+                        //var temp = msg.items[i].link.replace(/.*?\/sura.*?(\d+).*?(\d+).*/g,'$1-$2').split('-');
+                        //item += '<div class="item rtl">'+msg.items[i].htmlSnippet+'<div class="desc">Sura '+temp[0]+', Aya '+temp[1]+'</div></div>';
+                        item += '<div class="tipue_search_content_title">'+msg.items[i].htmlTitle+'</div>';
+                        item += '<div class="tipue_search_content_url">'+msg.items[i].link+'</div>';
+                        item += '<div class="tipue_search_content_text">'+msg.items[i].htmlSnippet+'</div>';
                     }
-                    $('.result').html(item);
+                    $('#tipue_search_content').html(item);
                 },
                 error: function(err) {
                     //console.log(err.status + ': ' + err.responseJSON.error.message);
@@ -63,7 +77,7 @@
                     }
                 }
             });
-        }        
+        }
     </script>
 </body>
 </html>

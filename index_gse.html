@@ -6,18 +6,110 @@
 	<title>Quransah Verification Assistant</title>
     
     <link href="css/style.css" rel="stylesheet">
-    <link href="lib/tipuesearch/tipuesearch.css" rel="stylesheet">
-        
+          
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    
 </head>
 
-<body style="padding: 20px;">
+<body>
+<div class="header">       
+        <div class="kotak">
+        <img class="img" src="img/quran.png">
+        </div>
+        <div class="label1">Quransah Verification Assistant</div>
+</div>
+<ul class="topnav">
+      <li><a href="#home">Home</a></li>
+      <li><a href="public_question.html">Public Question</a></li>
+      <li><a class="active" href="#contact">Search Quran Text</a></li>
+     <!-- <li class="right"><a href="#about">About</a></li> -->
+</ul>
+<div class="search_area">
     <form action="">
-        <input type="text" name="q" id="tipue_search_input" autocomplete="off">
+    <input type="text" name="q" id="tipue_search_input" autocomplete="off" placeholder="search aya">
     </form>
+</div>
+
+    
     <div id="tipue_search_content"></div>
+        <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+        <span class="close">×</span>
+        <iframe id="tarik"></iframe>
+        </div>
+
+    </div>
+
     
     <script>
+
+        $('body').on('click','a.xyz',function(){
+            //alert('test');
+            var modal = document.getElementById('myModal');
+            modal.style.display = "block";
+
+            var link = $(this).attr('data-link');
+            //console.log(link);
+            $('#tarik').attr('src','http://'+link);
+            
+
+        })
+
+        $('#tarik').load(function() {
+
+            var string = $('#tipue_search_input').val().split(' ');
+            alert(string);
+
+            //var test = $('#tarik').contents().find(".container").html();
+            //alert(test);
+
+            for(var i in string){
+
+                console.log(string[i]);
+                $('#tarik').html($('#tarik').html().replace(string[i],'<span class="kuning">'+string[i]+'</span>'));
+
+                // $('p').html($('p').html().replace(/Kuantan/g, '<font color="red">Kuantan</font>'));
+                }
+
+
+          // console.log("content");
+            
+
+            //test = $('#tarik').contents().find(".container").html();
+           // alert(test);
+
+            //if(string == test)
+            //{
+            //    $(".container ")
+            //}
+
+            
+            //console.log(c);
+        });
+
+        
+
+
+
+
+
+
+
+
+
+        $('body').on('click','a.j',function(){
+            //alert('test');
+            var modal = document.getElementById('myModal');
+            modal.style.display = "block";
+
+            var link = $(this).attr('data-link');
+            console.log(link);
+
+            $('#tarik').attr('src','http://'+link);
+        })
+
         var keys = [
             'AIzaSyDQ9H9ZrvKONfmJRHZZb-vWoqcbWFbMR00',
             'AIzaSyCkGrfuoX9Je30Ie0jRSKVVr2YEpFHa6f0',
@@ -33,16 +125,12 @@
         }
         
         function getURLP(name) {
+
             return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20')) || null;
         }
     
         function search(query) {
-            //query = query
-            //    .replace(/[\u0617-\u061A\u064B-\u0652\u06e1-\u06e9]/g, "")   //remove Tashkeel
-            //    .replace(/[\u0671-\u0675\u0622\u0623\u0625]/g, "\u0627")      //strip symboled alif
-            //    .replace(/\(\d+\)/g, " ")                                                                               //remove ayaNumber
-            //;
-            
+                     
             query = query.replace(/ /g, ' OR ');
             console.log("Search for "+query);
 
@@ -58,25 +146,64 @@
                 success: function(msg){
                     var item = '';
                     console.log(msg);
+                    console.log(decodeURIComponent(msg.items[0].link));
+
                     //console.log(msg.items);
                     for(var i in msg.items) {
-                        //var temp = msg.items[i].link.replace(/.*?\/sura.*?(\d+).*?(\d+).*/g,'$1-$2').split('-');
-                        //item += '<div class="item rtl">'+msg.items[i].htmlSnippet+'<div class="desc">Sura '+temp[0]+', Aya '+temp[1]+'</div></div>';
-                        item += '<div class="tipue_search_content_title">'+msg.items[i].htmlTitle+'</div>';
-                        item += '<div class="tipue_search_content_url">'+msg.items[i].link+'</div>';
-                        item += '<div class="tipue_search_content_text">'+msg.items[i].htmlSnippet+'</div>';
+                        
+                        var link = msg.items[i].link.replace(/http\:\/\/www.bangipingpong.com/g,"localhost:8080/QuranSah-Verification-Assistant/sura/Sura",/\./g,"/").replace(/http\:\/\/bangipingpong.com/g,"localhost:8080/QuranSah-Verification-Assistant/sura/Sura",/\./g,"/").replace(/\/sura_plain\/Sura/g,"",/\./g,"/");
+
+                        item += '<div class="tipue_search_content_title"><a href="#" class="xyz" data-link="'+link+'">'+ msg.items[i].htmlTitle.replace(/Bangi/g,"",/\./g," ").replace(/Ping Pong/g,"",/\./g,"").replace(/(?!^)\- /,"",/\./g," ") +'</a></div>';
+                        
+
+                        item += '<div class="tipue_search_content_url"><a href="#" class="j" data-link="'+ link +'">'+ msg.items[i].link.replace(/http\:\/\/www.bangipingpong.com/g,"localhost:8080/QuranSah-Verification-Assistant/sura/Sura",/\./g,"/").replace(/http\:\/\/bangipingpong.com/g,"localhost:8080/QuranSah-Verification-Assistant/sura/Sura",/\./g,"/") +'</a></div>';
+
+                        item += '<div class="tipue_search_content_text">'+ msg.items[i].htmlSnippet +'</div>';
+                                             
                     }
+
                     $('#tipue_search_content').html(item);
+
+                    // Get the modal
+        var modal = document.getElementById('myModal');
+
+        // Get the button that opens the modal
+        var btn = $("display");
+
+        // Get the <span> element that closes the modal
+        var span = $(".close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
                 },
                 error: function(err) {
                     //console.log(err.status + ': ' + err.responseJSON.error.message);
                     if(err.status=='403') {
                         pin++;
+                        if (pin=='4')
+                        {
+                            pin=0;
+                        }
                         console.log('Trying '+pin);
                         search(query);
                     }
                 }
             });
+
         }
     </script>
 </body>

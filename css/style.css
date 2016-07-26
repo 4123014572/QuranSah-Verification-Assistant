@@ -18,32 +18,43 @@
 	font-weight: 200;
 }
 body {
-    font: 28px scheherazade;
-    direction: rtl;
+    font: 22px scheherazade;
     margin: 0;
+    /*background-color:#F5F5C2;*/
 }
 body > form {
-    margin: -20px -20px 0 -20px;
-    padding: 5px 7px;
-    background-image: url(../img/tile.png);
+   /* 
+    padding: 4px 4px;
+    direction: rtl;
+    background-color: #F7FCE3;
+    background-image: url("../img/islamic_pattern4.jpg");
+    background-position: center;
+    */
 }
+
+body > header {
+       
+}
+
 .card {
     background: white;
     box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.5);
 }
-.container {
+
+.container {    
     position: relative;
-    width: 500px;
+    width: auto;
     box-sizing: border-box;
     padding: 50px 50px 10px 50px;
-    background: #F7FCE3 url(../img/frame.png) repeat-y -500px 0;
+    
     line-height: 45px;
+    direction: rtl;
+
 }
 .container:before {
     display: block;
-    width: 500px;
-    height: 23px;
-    background: #F7FCE3 url(../img/frame.png) no-repeat;
+    width: auto;
+    height: 23px; 
     content: '';
     position: absolute;
     top: 0;
@@ -51,14 +62,14 @@ body > form {
 }
 .container:after {
     display: block;
-    width: 500px;
-    height: 23px;
-    background: #F7FCE3 url(../img/frame.png) no-repeat 0 bottom;
+    width: auto;
+    height: 23px;  
     content: '';
     position: absolute;
     top: 100%;
     left: 0;
 }
+
 .sura {
     color: black;
     background: pink;
@@ -73,7 +84,298 @@ body > form {
 aya {
     display: none;
 }
-.tipue_search_content_url {
+
+b {
+    color:red;
+}
+
+ /* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: -70px;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: auto;
+    height:80% 
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#tarik{
+    width:100%;
+    height:80%;
+}
+
+
+
+#tipue_search_input{
+    padding: 1px 27px;    
+    font: 22px scheherazade;
+    color: #333;
+    border-radius: 4px;
+    border: 0;
+    outline: 0;
+    width: 400px;    
+    background: #f7fce3 url("../img/search.png") no-repeat -1px -2px;    
+    font-size: larger;
+    direction: rtl;
+}
+#tipue_search_content
+{
+    direction: rtl;
+}
+
+.tipue_search_content_title
+{
+    font: 300 21px/1.7 OpenSans;
+    margin-top: 50px;
+    margin-right: 45px;
+   
+}
+
+.tipue_search_content_title a:hover
+{
+    color: #555;
+}
+
+.tipue_search_content_url
+{
+    font: 300 14px/1.9 OpenSans;
+    word-wrap: break-word;
+    hyphens: auto;
     direction: ltr;
     text-align: right;
+        margin-right: 45px;
+   
+}
+
+.tipue_search_content_url a:hover
+{
+    color: #555;   
+}
+
+.tipue_search_content_text{
+    font: 28px scheherazade;
+    margin-right: 45px;
+    
+}
+
+.xyz{
+    text-decoration: none;
+    color:black;
+}
+
+
+.login{
+    position: absolute;
+    top: 0vw;
+    left: 97vw;
+    width: 2vw;
+}
+
+/*------header------*/
+.header{
+        width:100%;
+        height:185px;
+        background: rgba(183,222,237,1);
+        background: -moz-linear-gradient(left, rgba(183,222,237,1) 0%, rgba(133,208,233,1) 17%, rgba(33,180,226,0) 51%, rgba(137,209,234,1) 85%, rgba(183,222,237,1) 100%);
+        background: -webkit-gradient(left top, right top, color-stop(0%, rgba(183,222,237,1)), color-stop(17%, rgba(133,208,233,1)), color-stop(51%, rgba(33,180,226,0)), color-stop(85%, rgba(137,209,234,1)), color-stop(100%, rgba(183,222,237,1)));
+        background: -webkit-linear-gradient(left, rgba(183,222,237,1) 0%, rgba(133,208,233,1) 17%, rgba(33,180,226,0) 51%, rgba(137,209,234,1) 85%, rgba(183,222,237,1) 100%);
+        background: -o-linear-gradient(left, rgba(183,222,237,1) 0%, rgba(133,208,233,1) 17%, rgba(33,180,226,0) 51%, rgba(137,209,234,1) 85%, rgba(183,222,237,1) 100%);
+        background: -ms-linear-gradient(left, rgba(183,222,237,1) 0%, rgba(133,208,233,1) 17%, rgba(33,180,226,0) 51%, rgba(137,209,234,1) 85%, rgba(183,222,237,1) 100%);
+        background: linear-gradient(to right, rgba(183,222,237,1) 0%, rgba(133,208,233,1) 17%, rgba(33,180,226,0) 51%, rgba(137,209,234,1) 85%, rgba(183,222,237,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b7deed', endColorstr='#b7deed', GradientType=1 );     
+}
+
+.kotak {
+    top: 0;
+    width: 7em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*------------css for tab button-----------*/
+ul.topnav {
+    list-style-type: none;
+    padding-left: 40px;
+    padding-right: 40px;
+    overflow: hidden;
+    background-color: transparent;
+    margin: -37px;
+}
+
+ul.topnav li {
+    float: left;
+    background-color: rgba(39, 95, 144, 0.5);
+    border-radius: 5px;
+}
+
+ul.topnav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 0px 16px;
+    text-decoration: none;
+}
+
+ul.topnav li a:hover:not(.active) {
+    background-color: #111;
+    border-radius: 5px;
+}
+
+ul.topnav li a.active {
+    background-color: #275f90;
+    border-radius: 5px;
+}
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 600px){
+    ul.topnav li.right,
+    ul.topnav li {float: none;}
+    #tipue_search_input{float: none;}
+}
+/*------------end of css tab button-----------*/
+
+/*------------search quran aya-----------*/
+.search_area {
+    margin-top: 37px;
+    text-align: center;
+    background-image: url("../img/islamic_pattern4.jpg");
+    background-position: center;
+    padding: 4px;
+}
+
+.search_area2 {
+    margin-top: 37px;
+    text-align: center;
+    background-image: url("../img/islamic_pattern4.jpg");
+    background-position: center;
+    padding: 27px;
+}
+
+input#tipue_search_input {
+    width: 50vw;
+}
+
+img.img {
+    margin-left: -24px;
+}
+
+.label1{
+    text-align: center;
+    font: 28px caption;
+    margin-top: -18px;
+    font-style: italic;
+}
+/*
+.question_form{
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+
+.question_form {
+    margin-top: 3vw;
+    margin-left: 30vw;
+    margin-right: 30vw;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 12px;
+    border-color: #ebebeb;
+*/
+
+input#fname {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+input#email{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+textarea#comment{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #275f90;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #000000;
+}
+
+.question_form {
+    border-radius: 15px;
+    background-color: #f2f2f2;
+    padding-top: 2%;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 24px;
+}
+
+@media only screen and (max-width: 600px) {
+    .question_form {
+    margin-left: 5%;
+    margin-right: 5%;
+    }
 }

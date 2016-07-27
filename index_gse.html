@@ -60,17 +60,19 @@
         $('#tarik').load(function() {
 
             var string = $('#tipue_search_input').val().split(' ');
-            alert(string);
+            //alert(string);
 
             //var test = $('#tarik').contents().find(".container").html();
             //alert(test);
 
             for(var i in string){
+                var target = $("#tarik").contents().find(".container");
+                var re = new RegExp(string[i], 'g');
+                target.html(target.html().replace(re, '<span style="color:red">'+string[i]+'</span>'));
+                //console.log(string[i]);
+                //$('#tarik').html($('#tarik').html().replace(string[i],'<span class="kuning">'+string[i]+'</span>'));
 
-                console.log(string[i]);
-            //$('#tarik').html($('#tarik').html().replace(string[i],'<span class="kuning">'+string[i]+'</span>'));
-
-            $("#tarik").contents().find(".aya:contains("+string[i]+")").css("color","red");
+                //$("#tarik").contents().find(".aya:contains("+string[i]+")").css("color","red");
                                   
                 //$("#tarik").contents().find(".aya:contains("+string[i]+")").css("color","red"); yg
                 // $('p').html($('p').html().replace(/Kuantan/g, '<font color="red">Kuantan</font>'));
@@ -124,18 +126,18 @@
                     "&q="+query,
                 success: function(msg){
                     var item = '';
-                    console.log(msg);
-                    console.log(decodeURIComponent(msg.items[0].link));
+                    //console.log(msg);
+                    //console.log(decodeURIComponent(msg.items[0].link));
 
                     //console.log(msg.items);
                     for(var i in msg.items) {
                         
-                        var link = msg.items[i].link.replace(/http\:\/\/www.bangipingpong.com/g,"localhost:8080/QuranSah-Verification-Assistant/sura/Sura",/\./g,"/").replace(/http\:\/\/bangipingpong.com/g,"localhost:8080/QuranSah-Verification-Assistant/sura/Sura",/\./g,"/").replace(/\/sura_plain\/Sura/g,"",/\./g,"/");
+                        var link = msg.items[i].link.replace(/http\:\/\/www.bangipingpong.com/g,"127.0.0.1:8080/QuranSah-Verification-Assistant/sura/Sura",/\./g,"/").replace(/http\:\/\/bangipingpong.com/g,"127.0.0.1:8080/QuranSah-Verification-Assistant/sura/Sura",/\./g,"/").replace(/\/sura_plain\/Sura/g,"",/\./g,"/");
 
                         item += '<div class="tipue_search_content_title"><a href="#" class="xyz" data-link="'+link+'">'+ msg.items[i].htmlTitle.replace(/Bangi/g,"",/\./g," ").replace(/Ping Pong/g,"",/\./g,"").replace(/(?!^)\- /,"",/\./g," ") +'</a></div>';
                         
 
-                        item += '<div class="tipue_search_content_url"><a href="#" class="j" data-link="'+ link +'">'+ msg.items[i].link.replace(/http\:\/\/www.bangipingpong.com/g,"localhost:8080/QuranSah-Verification-Assistant/sura/Sura",/\./g,"/").replace(/http\:\/\/bangipingpong.com/g,"localhost:8080/QuranSah-Verification-Assistant/sura/Sura",/\./g,"/") +'</a></div>';
+                        item += '<div class="tipue_search_content_url"><a href="#" class="j" data-link="'+ link +'">'+ msg.items[i].link.replace(/http\:\/\/www.bangipingpong.com/g,"127.0.0.1:8080/QuranSah-Verification-Assistant/sura/Sura",/\./g,"/").replace(/http\:\/\/bangipingpong.com/g,"127.0.0.1:8080/QuranSah-Verification-Assistant/sura/Sura",/\./g,"/") +'</a></div>';
 
                         item += '<div class="tipue_search_content_text">'+ msg.items[i].htmlSnippet +'</div>';
                                              

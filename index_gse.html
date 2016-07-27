@@ -68,36 +68,15 @@
             for(var i in string){
 
                 console.log(string[i]);
-                $('#tarik').html($('#tarik').html().replace(string[i],'<span class="kuning">'+string[i]+'</span>'));
+            //$('#tarik').html($('#tarik').html().replace(string[i],'<span class="kuning">'+string[i]+'</span>'));
 
+            $("#tarik").contents().find(".aya:contains("+string[i]+")").css("color","red");
+                                  
+                //$("#tarik").contents().find(".aya:contains("+string[i]+")").css("color","red"); yg
                 // $('p').html($('p').html().replace(/Kuantan/g, '<font color="red">Kuantan</font>'));
                 }
 
-
-          // console.log("content");
-            
-
-            //test = $('#tarik').contents().find(".container").html();
-           // alert(test);
-
-            //if(string == test)
-            //{
-            //    $(".container ")
-            //}
-
-            
-            //console.log(c);
-        });
-
-        
-
-
-
-
-
-
-
-
+          });
 
         $('body').on('click','a.j',function(){
             //alert('test');
@@ -131,7 +110,7 @@
     
         function search(query) {
                      
-            query = query.replace(/ /g, ' OR ');
+            //query = query.replace(/ /g, ' OR ');
             console.log("Search for "+query);
 
             $.ajax({
@@ -196,7 +175,8 @@
                         pin++;
                         if (pin=='4')
                         {
-                            pin=0;
+                            alert("Your search has reached its maximum limit. Please Try Again Tomorrow.");
+                            
                         }
                         console.log('Trying '+pin);
                         search(query);

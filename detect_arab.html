@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title>Untitled Document</title>
+		<script src='jquery.min'></script>
+        <style>
+            .arabic { color:red; }
+            #question { width: 100%; border: 1px solid grey; margin-bottom: 20px; box-sizing: border-radius; padding: 10px;  }
+        </style>
+	</head>
+
+	<body>
+<div id="question" contenteditable onkeyup="detectArab()"></div>
+<script>
+    function detectArab() {
+        var v = $('#question'). text().split(' ');
+        for(var i in v) {
+            if(/[\u0600-\u06FF]/.test(v[i])) {
+                v[i] = '<span class=arabic>'+v[i]+'</span>';
+            }
+        }
+        $('#question').html(v.join(' '));
+    }
+</script>
+	</body>
+</html>

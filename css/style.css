@@ -43,18 +43,20 @@ body > header {
 
 .container {    
     position: relative;
-    width: auto;
+    width: 500px;
     box-sizing: border-box;
     padding: 50px 50px 10px 50px;
-    font: 28px scheherazade;
+    background: #F7FCE3 url(../img/frame.png) repeat-y -500px 0;
     line-height: 45px;
+    font: 28px scheherazade;
     direction: rtl;
+    }
 
-}
 .container:before {
     display: block;
-    width: auto;
-    height: 23px; 
+    width: 500px;
+    height: 23px;
+    background: #F7FCE3 url(../img/frame.png) no-repeat;
     content: '';
     position: absolute;
     top: 0;
@@ -62,8 +64,9 @@ body > header {
 }
 .container:after {
     display: block;
-    width: auto;
-    height: 23px;  
+    width: 500px;
+    height: 23px;
+    background: #F7FCE3 url(../img/frame.png) no-repeat 0 bottom;
     content: '';
     position: absolute;
     top: 100%;
@@ -72,7 +75,7 @@ body > header {
 
 .sura {
     color: black;
-    background: pink;
+    background: #b7deed;
     text-align: center;
     margin-bottom: 15px;
 }
@@ -81,6 +84,7 @@ body > header {
     color: #2E8B57;
     font: 20px trado;
 }
+
 aya {
     display: none;
 }
@@ -113,7 +117,7 @@ b {
     border: 1px solid #888;
     width: auto;
     height:80%;
-    width:80%; 
+    width:40%; 
 }
 
 /* The Close Button */
@@ -284,6 +288,7 @@ ul.topnav li.right {float: right;}
     background-image: url("../img/islamic_pattern4.jpg");
     background-position: center;
     padding: 27px;
+    height: 1px;
 }
 
 input#tipue_search_input {
@@ -384,4 +389,8 @@ input[type=submit]:hover {
 
 span.aya {
     font: 28px scheherazade;
+}
+
+.kuning{
+    color: red;
 }

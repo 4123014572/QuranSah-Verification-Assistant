@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+    <link href="css/style_quran.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css" />
+    <title>Quransah Verification Assistant</title>
+   <script>
+
+ 	$(document).ready(function() {
+                
+	 	$(".content-html").load("homer.html");
+
+	 	
+
+    });
+
+    	function home() {
+	    $(".content-html").load("homer.html");       
+		}
+
+		function searchqurantext() {
+	    $(".content-html").load("search_quran_text.html");    
+		}
+
+		function publicquestion() {
+	    $(".content-html").load("public_question.html");    
+		}
+
+	
+
+   </script>
+</head>
+<body>
+	<div class="header">
+		<div class="kotak">
+        <img class="img" src="img/quran.png">
+        </div>
+        <div class="label1">Quransah Verification Assistant</div>
+	</div>
+	
+	<ul class="topnav">
+      <li><a onclick="home()">Home</a></li>
+      <li><a onclick="publicquestion()">Public Question</a></li>
+      <li><a onclick="searchqurantext()">Search Quran Text</a></li>
+	</ul>
+	
+	<div class="search_area2">   
+    </div>
+
+	<div class="content-html"></div>
+
+
+
+
+</body>
+</html>

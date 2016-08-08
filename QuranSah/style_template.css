@@ -1,0 +1,337 @@
+/*------------------------------------------------------------
+-------- DEMO Code
+------------------------------------------------------------*/
+
+@font-face {
+    font-family: trado;
+    src: url(./font/trado.ttf);
+}
+@font-face {
+    font-family: scheherazade;
+    src: url(./font/Scheherazade-Regular.ttf);
+    font-weight: 200;
+}
+@font-face {
+    font-family: scheherazade;
+    src: url(./font/Scheherazade-Bold.ttf);
+    font-weight: bold;
+}
+@font-face {
+    font-family: OpenSans;
+    src: url(./font/OpenSans-Regular.ttf);
+    font-weight: 200;
+}
+
+
+    body {
+    	background:#e3e3e3;
+    	font-family: Calibri;
+    }
+
+	.menu {
+		padding: 10px 22px;
+		box-shadow:0px 1px 1px rgba(0,0,0,0.15);
+		border-radius:3px;
+		width: 100%;
+	}
+
+	.wrap {
+		width: 100%;
+    	background: rgba(45, 147, 125, 0.77);
+    	height: 88px;
+	}
+
+	.menu {
+		position:relative;
+		display:inline-block;
+	}
+
+	.menu ul.active {
+		display:none;
+	}
+
+	.menu ul.not-active {
+		display:none;
+	}
+
+	.menu ul {
+		width: 15vw;
+		position:absolute;
+		top: 28%;
+    	left: 10vw;
+		padding:10px 25px;
+		box-shadow:3px 1px 1px rgba(0,0,0,0.15);
+		border-radius:3px;
+		background: rgba(45, 147, 125, 0.77);
+		z-index :10;
+
+	}
+
+	.menu ul:after {
+		width:0px;
+		height:0px;
+		position:absolute;
+		top:-12%;
+		left:22px;
+		content:'';
+		transform: translate(-400%, 150%);
+		border-top: 12px solid transparent;
+	    /* border-left: 7px solid #303030; */
+	    border-right: 10px solid #FFFFFF;
+	    border-bottom: 12px solid transparent;
+	}
+
+	.menu li {
+		margin:5px 0px 5px 0px;
+		float:none;
+		display:block;
+		padding: 15px;
+	}
+
+	.menu a {
+		display:block;
+		text-decoration: none;
+    	color: #FFFFFF;
+	}
+
+	.toggle-nav {
+		padding:20px;
+		float:left;
+		display:inline-block;		
+		border-radius:3px;
+		text-shadow:0px 1px 0px rgba(0,0,0,0.5);
+		color:#68e8cd;
+		font-size:20px;
+		transition:color linear 0.15s;
+
+	}
+
+	.toggle-nav:hover, .toggle-nav.active,  {
+		text-decoration:none;
+		
+	}
+
+
+	.login {
+		cursor: pointer;
+	    color: #FFFFFF;
+	    position: relative;
+	    display: inline-block;
+	    top: -57px;
+	    left: 93vw;
+	    font-family: calibri;
+	    font-size: 20px;
+	    
+	}	
+
+	.content-area {
+	    margin-top: -4vh;
+	    padding: 40px;
+	}
+
+
+/*------------search quran aya-----------*/
+.search_area {
+    margin-top: 0px;
+    text-align: center;
+    background-image: url("./img/tile.png");
+    background-position: center;
+    padding: 4px;
+    height: 61px;
+}
+
+input#tipue_search_input {
+    width: 30%;
+    height: 47px;
+    font: 32px scheherazade;
+    top: 94px;    
+    position: absolute;
+    right: 82px;
+
+}
+
+.card {
+    background: white;
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.5);
+}
+
+.container {    
+    position: relative;
+    width: 500px;
+    box-sizing: border-box;
+    padding: 50px 50px 10px 50px;
+    background: #F7FCE3 url(../img/frame.png) no-repeat 0 bottom;
+    line-height: 45px;
+    font: 28px scheherazade;
+    direction: rtl;
+    }
+
+.container:before {
+    display: block;
+    width: 500px;
+    height: 23px;
+    background: #F7FCE3 url(../img/frame.png) no-repeat;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.container:after {
+    display: block;
+    width: 500px;
+    height: 23px;
+    background: #F7FCE3 url(../img/frame.png) no-repeat 0 bottom;
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+.sura {
+    color: black;
+    background: #b7deed;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.number {
+    display: inline-block;
+    color: #2E8B57;
+    font: 20px trado;
+}
+
+aya {
+    display: none;
+
+}
+
+b {
+    color:red;
+}
+
+ /* The Modal (background) */
+.modal1 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 20px; /* Location of the box */
+    left: 0;
+    top: 0px;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+}
+
+/* Modal Content */
+.modal-content1 {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid rgba(0,0,0,.2);
+    width: auto;
+    height:95%;
+    width:40%;
+    border-radius: 6px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.5); 
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#tarik{
+    width:100%;
+    height:95%;
+    border:none;
+}
+
+#tipue_search_input{
+    padding: 1px 27px;    
+    font: 22px scheherazade;
+    color: #333;
+    border-radius: 4px;
+    border: 0;
+    outline: 0;
+    width: 400px;    
+    background: #f7fce3 url("./img/search.png") no-repeat -1px -2px;    
+    font-size: larger;
+    direction: rtl;
+}
+#tipue_search_content
+{
+    direction: rtl;
+}
+
+.tipue_search_content_title
+{
+    font: 300 21px/1.7 OpenSans;
+    margin-top: 50px;
+    margin-right: 45px;
+   
+}
+
+.tipue_search_content_title a:hover
+{
+    color: #555;
+}
+
+.tipue_search_content_url
+{
+    font: 300 15px/1.9 OpenSans;
+    word-wrap: break-word;
+    hyphens: auto;
+    direction: ltr;
+    text-align: right;
+    margin-right: 45px;
+   
+}
+
+.tipue_search_content_url a:hover
+{
+    color: #555;   
+}
+
+.tipue_search_content_text{
+    font: 32px scheherazade;
+    margin-right: 45px;
+    
+}
+
+.xyz{
+    text-decoration: none;
+    color:black;
+}
+
+p.arabic-question {
+    font: 28px scheherazade;
+    direction: rtl;
+}
+
+
+textarea.jawapan2_arabic {
+    font: 28px scheherazade;
+    direction: rtl;
+    width: 36vw;
+    height: 22vh;
+}
+
+.label-aya{
+    font-style: italic;
+
+}
+
+

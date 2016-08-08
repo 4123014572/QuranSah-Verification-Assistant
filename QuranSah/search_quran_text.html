@@ -1,0 +1,165 @@
+	<div id="tipue_search_content"></div>
+    
+        <!--form action=""-->
+       
+        <input type="text" name="q" id="tipue_search_input" autocomplete="off" placeholder="search ayat" onkeydown="tekan($(this).val())">
+
+        <!--/form-->        
+    
+        <!-- The Modal -->
+    <div id="myModal1" class="modal1">
+        <!-- Modal content -->
+        <div class="modal-content1">
+            <span class="close">×</span>
+            <iframe id="tarik"></iframe>
+        </div>
+    </div>
+
+    
+    <script>
+
+        function tekan(enter)
+        {
+            if (event.keyCode == 13) {
+                search(enter);
+            }
+        }
+
+
+        $('body').on('click','a.xyz',function(){
+            //alert('test');
+            var modal = document.getElementById('myModal1');
+            modal.style.display = "block";
+
+            var link = $(this).attr('data-link');
+            //console.log(link);
+            $('#tarik').attr('src','http://'+link);
+            
+        })
+
+        $('#tarik').load(function() {
+
+            var string = $('#tipue_search_input').val().split(' ');
+            //alert(string);
+
+            for(var i in string){
+                var target = $("#tarik").contents().find(".container");
+                var re = new RegExp(string[i], 'g');
+                target.html(target.html().replace(re, '<span style="color:red">'+string[i]+'</span>'));
+                }
+          });
+
+        $('body').on('click','a.j',function(){
+            //alert('test');
+            var modal = document.getElementById('myModal1');
+            modal.style.display = "block";
+
+            var link = $(this).attr('data-link');
+            console.log(link);
+
+            $('#tarik').attr('src','http://'+link);
+        })
+
+        var keys = [
+            'AIzaSyDQ9H9ZrvKONfmJRHZZb-vWoqcbWFbMR00',
+            'AIzaSyCkGrfuoX9Je30Ie0jRSKVVr2YEpFHa6f0',
+            'AIzaSyBDIEw78uMLhZ2XfF7QCtpFPEPOl6aqQpI',
+            'AIzaSyDUViYxm8Vv-qCypLPWmsOJPEZx0WfAAxQ',
+            'AIzaSyA1WmDR_M_2WzcMt6GGqx9yEQ0AbrGDow8'
+        ];
+
+        var pin = 0;
+        
+        /*if(getURLP('q')) {
+            $('#tipue_search_input').val(getURLP('q'));
+            search($('#tipue_search_input').val())
+        }*/
+        
+        function getURLP(name) {
+
+            return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20')) || null;
+        }
+    
+        function search(query) {
+                     
+            //query = query.replace(/ /g, ' OR ');
+            //alert("test");
+            console.log("Search for "+query);
+
+            $.ajax({
+                type: 	"GET",
+                dataType: "json",
+                url:
+                    "https://www.googleapis.com/customsearch/v1"+
+                    "?key="+keys[pin]+"&"+
+                    "&cx=007014468248327134923:_qpm0lcr_vu"+
+                    "&num=10&start=1"+
+                    "&q="+query,
+                success: function(msg){
+                    var item = '';
+                    console.log(msg);
+                    console.log(decodeURIComponent(msg.items[0].link));
+
+                    //console.log(msg.items);
+                    for(var i in msg.items) {
+                        
+                        var test = "localhost:8080";
+                        var link = msg.items[i].link.replace(/http\:\/\/www.bangipingpong.com/g,test+"/QuranSah-Verification-Assistant/sura/Sura",/\./g,"/").replace(/http\:\/\/bangipingpong.com/g,test+"/QuranSah-Verification-Assistant/sura/Sura",/\./g,"/").replace(/\/sura_plain\/Sura/g,"",/\./g,"/");
+
+                        console.log(link);
+
+                        item += '<div class="tipue_search_content_title"><a href="#" class="xyz" data-link="'+link+'">'+ msg.items[i].htmlTitle.replace(/Bangi/g,"",/\./g," ").replace(/Ping Pong/g,"",/\./g,"").replace(/(?!^)\- /,"",/\./g," ") +'</a></div>';
+                        
+
+                        item += '<div class="tipue_search_content_url"><a href="#" class="j" data-link="'+ link +'">'+ msg.items[i].link.replace(/http\:\/\/www.bangipingpong.com/g,test+"/QuranSah-Verification-Assistant/sura/Sura",/\./g,"/").replace(/http\:\/\/bangipingpong.com/g,test+"/QuranSah-Verification-Assistant/sura/Sura",/\./g,"/") +'</a></div>';
+
+                        item += '<div class="tipue_search_content_text">'+ msg.items[i].htmlSnippet +'</div>';
+                                             
+                    }
+
+                    $('#tipue_search_content').html(item);
+                    
+
+                    // Get the modal
+        var modal = document.getElementById('myModal1');
+
+        // Get the button that opens the modal
+        var btn = $("display");
+
+        // Get the <span> element that closes the modal
+        var span = $(".close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+                },
+                error: function(err) {
+                    //console.log(err.status + ': ' + err.responseJSON.error.message);
+                    if(err.status=='403') {
+                        pin++;
+                        if (pin=='4')
+                        {
+                            alert("Your search has reached its maximum limit. Please Try Again Tomorrow.");
+                            
+                        }
+                        console.log('Trying '+pin);
+                        search(query);
+                    }
+                }
+            });
+
+        }
+    </script>
